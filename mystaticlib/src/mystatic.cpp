@@ -4,7 +4,7 @@
 namespace mystatic {
   
   void PrintMessage() {
-    std::cout << "Hello World from MyStatic Lib" << std::endl;
+    std::cout << "Hello World from MyStatic Lib for github" << std::endl;
   }
   
 }
