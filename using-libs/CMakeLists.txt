@@ -13,6 +13,12 @@ set (dep_include_dir "${PROJECT_SOURCE_DIR}/dependencies/mystatic/include/")
 #library dirs
 set (lib_dir "${PROJECT_SOURCE_DIR}/dependencies/mystatic/lib")
 
+# a message
+# to change compiler do not use set() command, instead:
+# cmake -DCMAKE_CXX_COMPILER="/usr/bin/g++" ..
+
+message(STATUS "Compiler is: ${CMAKE_CXX_COMPILER}")
+
 # Find source files
 file (GLOB source_files "${source_dir}/*.cpp")
 
