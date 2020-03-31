@@ -27,7 +27,7 @@ add_library(mystatic STATIC
 set_target_properties(${PROJECT_NAME} PROPERTIES
     VERSION ${PROJECT_VERSION}
     SOVERSION 1
-    PUBLIC_HEADER src/include/mystatic.h) #PUBLIC_HEADER property is used for shared(dynamic) libraries
+    PUBLIC_HEADER src/include/mystatic.h) 
 
 target_include_directories(mystatic PUBLIC ${include_dir})
 
@@ -38,7 +38,7 @@ target_include_directories(mystatic PUBLIC ${include_dir})
 install(TARGETS ${PROJECT_NAME}
     ARCHIVE DESTINATION ${LIBRARY_OUTPUT_PATH} #use this for static libraries
     # LIBRARY DESTINATION ${LIBRARY_OUTPUT_PATH} #use for shared lib(dynamic)
-    PUBLIC_HEADER DESTINATION ${INCLUDE_OUTPUT_PATH})
+    PUBLIC_HEADER DESTINATION ${INCLUDE_OUTPUT_PATH}) # this file is installed akter make install
 
 # file(GLOB HEADERS include/*.h)
 # install(FILES ${HEADERS} DESTINATION ${INCLUDE_OUTPUT_PATH})
