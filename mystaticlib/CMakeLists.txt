@@ -27,7 +27,7 @@ add_library(mystatic STATIC
 set_target_properties(${PROJECT_NAME} PROPERTIES
     VERSION ${PROJECT_VERSION}
     SOVERSION 1
-    PUBLIC_HEADER src/include/mystatic.h)
+    PUBLIC_HEADER src/include/mystatic.h) #PUBLIC_HEADER property is used for shared(dynamic) libraries
 
 target_include_directories(mystatic PUBLIC ${include_dir})
 
