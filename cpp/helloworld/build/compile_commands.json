@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/orcan/repos/dev/cpp/helloworld/build",
+  "command": "/usr/bin/c++     -Wall -Werror -std=c++14 -O3 -DNDEBUG   -o CMakeFiles/HelloWorld.dir/src/Log.cpp.o -c /home/orcan/repos/dev/cpp/helloworld/src/Log.cpp",
+  "file": "/home/orcan/repos/dev/cpp/helloworld/src/Log.cpp"
+},
+{
+  "directory": "/home/orcan/repos/dev/cpp/helloworld/build",
+  "command": "/usr/bin/c++     -Wall -Werror -std=c++14 -O3 -DNDEBUG   -o CMakeFiles/HelloWorld.dir/src/main.cpp.o -c /home/orcan/repos/dev/cpp/helloworld/src/main.cpp",
+  "file": "/home/orcan/repos/dev/cpp/helloworld/src/main.cpp"
+}
+]
