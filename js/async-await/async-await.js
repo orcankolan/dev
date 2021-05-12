@@ -1,46 +1,10 @@
-const todos = [
-  {
-    title: "Todo 1",
-    description: "eve git"
-  },
-  {
-    title: "Todo 1",
-    description: "video çekimi"
-  },
-  {
-    title: "Todo 1",
-    description: "gitar çal"
-  }
-]
+async function fetchTodos() {
+  const response = await (await fetch("https://jsonplaceholder.typicode.com/todos")).json();
 
-let todoListEl = document.getElementById("todoList");
-
-function todoList(){
-  setTimeout(() => {
-    let todoItems = "";
-    todos.forEach((item)=>{
-      todoItems += `
-        <li>
-          <b>${item.title}</b>
-          <p>${item.description}</p>
-        </li>`
-    });
-    todoListEl.innerHTML = todoItems;
-  }, 1000);
+  console.log(response);
+  response.forEach(i => {
+    console.log(i);
+  });
 }
 
-function pushTodo(todo, callback) {
-  setTimeout(() => {
-    todos.push(todo);
-    callback();
-  }, 2000);
-}
-
-const todo4 = {
-  title: "Todo 4",
-  description: "başka bişey yap"
-}
-
-pushTodo(todo4, todoList);
-
-// todoList();
+fetchTodos();
