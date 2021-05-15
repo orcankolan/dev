@@ -1,9 +1,11 @@
 #include <qwidget.h>
+#include "samplingthread.h"
 
 class Plot;
 class Knob;
 class WheelBox;
 class Readbox;
+class QString;
 
 class MainWindow : public QWidget
 {
@@ -11,6 +13,8 @@ class MainWindow : public QWidget
 
 public:
     MainWindow( QWidget * = NULL );
+    Readbox *d_fieldRead;
+    SamplingThread *smplThread;
 
     void start();
 
@@ -23,8 +27,10 @@ Q_SIGNALS:
     void frequencyChanged( double );
     void signalIntervalChanged( double );
 
+public Q_SLOTS:
+    void updateReader( double );
+
 private:
-    Readbox *d_fieldRead;
     Knob *d_frequencyKnob;
     Knob *d_amplitudeKnob;
     WheelBox *d_timerWheel;

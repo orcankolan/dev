@@ -7,19 +7,23 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlcdnumber.h>
+#include <QDebug>
 
 MainWindow::MainWindow( QWidget *parent ):
     QWidget( parent )
 {
-    const double intervalLength = 10.0; // seconds
+    const double intervalLength = 70.0; // seconds
+
+    smplThread = new SamplingThread( this );
 
     d_plot = new Plot( this );
     d_plot->setIntervalLength( intervalLength );
 
-    d_fieldRead = new Readbox( "Alan Şiddeti", 0.0, 1000.0, this );
+    d_fieldRead = new Readbox( "Alan Şiddeti", this );
+//    d_fieldRead->setValue( 0.0);
 
-    d_amplitudeKnob = new Knob( "Genlik", 0.0, 200.0, this );
-    d_amplitudeKnob->setValue( 160.0 );
+    d_amplitudeKnob = new Knob( "Genlik", 1.0, 10.0, this );
+    d_amplitudeKnob->setValue( 1.0 );
 
     d_frequencyKnob = new Knob( "Frekans [Hz]", 0.1, 20.0, this );
     d_frequencyKnob->setValue( 17.8 );
@@ -49,6 +53,7 @@ MainWindow::MainWindow( QWidget *parent ):
 
     connect( d_amplitudeKnob, SIGNAL( valueChanged( double ) ),
         SIGNAL( amplitudeChanged( double ) ) );
+
     connect( d_frequencyKnob, SIGNAL( valueChanged( double ) ),
         SIGNAL( frequencyChanged( double ) ) );
     connect( d_timerWheel, SIGNAL( valueChanged( double ) ),
@@ -56,12 +61,17 @@ MainWindow::MainWindow( QWidget *parent ):
 
     connect( d_intervalWheel, SIGNAL( valueChanged( double ) ),
         d_plot, SLOT( setIntervalLength( double ) ) );
-
 }
 
 void MainWindow::start()
 {
     d_plot->start();
+}
+
+void MainWindow::updateReader(double value)
+{
+    qDebug() << value ;
+    d_fieldRead->setValue(value);
 }
 
 double MainWindow::frequency() const

@@ -8,13 +8,15 @@
 #include <qlabel.h>
 #include <qevent.h>
 
-Readbox::Readbox( const QString &title, double min, double max, QWidget *parent ):
+Readbox::Readbox( const QString &title, QWidget *parent ):
     QWidget( parent )
 {
     QFont font( "Helvetica", 10 );
 
-    d_number = new QLCDNumber( this );
+    d_number = new QLCDNumber( 8, this );
     d_number->setSegmentStyle( QLCDNumber::Flat );
+    d_number->setSmallDecimalPoint(false);
+    d_number->setMode(QLCDNumber::Dec);
     d_number->setAutoFillBackground( true );
     d_number->setFixedHeight( d_number->sizeHint().height() * 2 );
 
@@ -30,8 +32,8 @@ Readbox::Readbox( const QString &title, double min, double max, QWidget *parent 
     setSizePolicy( QSizePolicy::MinimumExpanding,
         QSizePolicy::MinimumExpanding );
 
-    connect( d_number, SIGNAL( valueChanged( double ) ),
-        this, SIGNAL( valueChanged( double ) ) );
+//    connect( d_number, SIGNAL( valueChanged( double ) ),
+//        this, SIGNAL( valueChanged( double ) ) );
 }
 
 QSize Readbox::sizeHint() const
@@ -52,6 +54,11 @@ QSize Readbox::sizeHint() const
 double Readbox::value() const
 {
     return d_number->value();
+}
+
+void Readbox::setValue( double value )
+{
+    d_number->display( value );
 }
 
 void Readbox::setTheme( const QColor &color )

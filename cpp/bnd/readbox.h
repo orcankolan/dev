@@ -13,8 +13,7 @@ class Readbox: public QWidget
     Q_PROPERTY( QColor theme READ theme WRITE setTheme )
 
 public:
-    Readbox ( const QString &title,
-        double min, double max, QWidget *parent = NULL );
+    Readbox ( const QString &title, QWidget *parent = NULL );
 
     virtual QSize sizeHint() const;
 
