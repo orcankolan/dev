@@ -44,7 +44,7 @@ MainWindow::MainWindow( QWidget *parent ):
 
     QVBoxLayout* vLayout2 = new QVBoxLayout();
     vLayout2->addWidget( d_plot);
-    vLayout2->addStretch( 5 );
+    vLayout2->addStretch( 1 );
 
     QHBoxLayout* layout = new QHBoxLayout( this );
     layout->addLayout( vLayout2, 12 );
@@ -72,7 +72,6 @@ void MainWindow::updateReader(double value)
 {
     qDebug() << value ;
     d_fieldRead->setValue(value);
-//    d_plot->replot();
 }
 
 //double MainWindow::frequency() const

@@ -122,7 +122,7 @@ Plot::~Plot()
 void Plot::start()
 {
     d_clock.start();
-    d_timerId = startTimer( 10 );
+    d_timerId = startTimer( 100 );
 }
 
 void Plot::replot()

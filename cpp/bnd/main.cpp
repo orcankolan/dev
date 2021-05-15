@@ -10,7 +10,7 @@ int main( int argc, char **argv )
     MainWindow window;
     window.resize( 860, 490 );
 
-//    window.smplThread->setFrequency( window.frequency() );
+    window.smplThread->setFrequency( 1.0 );
     window.smplThread->setAmplitude( window.amplitude() );
     window.smplThread->setInterval( window.signalInterval() );
 
