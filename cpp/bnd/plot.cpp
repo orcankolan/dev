@@ -60,8 +60,8 @@ private:
 #if QT_VERSION >= 0x040400
         QLinearGradient gradient;
         gradient.setCoordinateMode( QGradient::StretchToDeviceMode );
-        gradient.setColorAt( 0.0, QColor( 0, 49, 110 ) );
-        gradient.setColorAt( 1.0, QColor( 0, 87, 174 ) );
+        gradient.setColorAt( 0.0, QColor( 0, 0, 25 ) );
+        gradient.setColorAt( 1.0, QColor( 20, 0, 80 ) );
 
         pal.setBrush( QPalette::Window, QBrush( gradient ) );
 #else
@@ -70,7 +70,6 @@ private:
 
         // QPalette::WindowText is used for the curve color
         pal.setColor( QPalette::WindowText, Qt::green );
-
         setPalette( pal );
     }
 };
@@ -78,7 +77,7 @@ private:
 Plot::Plot( QWidget *parent ):
     QwtPlot( parent ),
     d_paintedPoints( 0 ),
-    d_interval( 0.1, 70.1 ),
+    d_interval( 0.1, 50.1 ),
     d_timerId( -1 )
 {
     d_directPainter = new QwtPlotDirectPainter();
@@ -90,7 +89,7 @@ Plot::Plot( QWidget *parent ):
 
     setAxisTitle( QwtPlot::xBottom, "Zaman [s]" );
     setAxisScale( QwtPlot::xBottom, d_interval.minValue(), d_interval.maxValue() );
-    setAxisScale( QwtPlot::yLeft, 0.0, 1000.0 );
+    setAxisScale( QwtPlot::yLeft, 0.0, 3000.0 );
 
     QwtPlotGrid *grid = new QwtPlotGrid();
     grid->setPen( Qt::gray, 0.0, Qt::DotLine );
@@ -108,7 +107,7 @@ Plot::Plot( QWidget *parent ):
 
     d_curve = new QwtPlotCurve();
     d_curve->setStyle( QwtPlotCurve::Lines );
-    d_curve->setPen( canvas()->palette().color( QPalette::WindowText ) );
+    d_curve->setPen( canvas()->palette().color( QPalette::WindowText ), 2.0 );
     d_curve->setRenderHint( QwtPlotItem::RenderAntialiased, true );
     d_curve->setPaintAttribute( QwtPlotCurve::ClipPolygons, false );
     d_curve->setData( new CurveData() );
@@ -247,7 +246,7 @@ bool Plot::eventFilter( QObject *object, QEvent *event )
     if ( object == canvas() &&
         event->type() == QEvent::PaletteChange )
     {
-        d_curve->setPen( canvas()->palette().color( QPalette::WindowText ) );
+        d_curve->setPen( canvas()->palette().color( QPalette::WindowText ), 2.0 );
     }
 
     return QwtPlot::eventFilter( object, event );

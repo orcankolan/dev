@@ -8,9 +8,9 @@ int main( int argc, char **argv )
     app.setPalette( Qt::gray );
 
     MainWindow window;
-    window.resize( 880, 600 );
+    window.resize( 860, 490 );
 
-    window.smplThread->setFrequency( window.frequency() );
+//    window.smplThread->setFrequency( window.frequency() );
     window.smplThread->setAmplitude( window.amplitude() );
     window.smplThread->setInterval( window.signalInterval() );
 
