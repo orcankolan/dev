@@ -122,7 +122,7 @@ Plot::~Plot()
 void Plot::start()
 {
     d_clock.start();
-    d_timerId = startTimer( 100 );
+    d_timerId = startTimer( 50 );
 }
 
 void Plot::replot()
@@ -208,7 +208,7 @@ void Plot::incrementInterval()
     }
     setAxisScaleDiv( QwtPlot::xBottom, scaleDiv );
 
-    d_origin->setValue( d_interval.minValue() + d_interval.width() / 2.0, 0.0 );
+    d_origin->setValue( d_interval.minValue() + d_interval.width() / 1.0, 0.0 );
 
     d_paintedPoints = 0;
     replot();
@@ -246,7 +246,7 @@ bool Plot::eventFilter( QObject *object, QEvent *event )
     if ( object == canvas() &&
         event->type() == QEvent::PaletteChange )
     {
-        d_curve->setPen( canvas()->palette().color( QPalette::WindowText ), 2.0 );
+        d_curve->setPen( canvas()->palette().color( QPalette::WindowText ), 1.0 );
     }
 
     return QwtPlot::eventFilter( object, event );
