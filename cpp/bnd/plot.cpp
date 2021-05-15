@@ -23,7 +23,7 @@ public:
         // backing store of QWidget is good enough.
 
         setPaintAttribute( QwtPlotCanvas::BackingStore, false );
-        setBorderRadius( 10 );
+        setBorderRadius( 5 );
 
         if ( QwtPainter::isX11GraphicsSystem() )
         {
