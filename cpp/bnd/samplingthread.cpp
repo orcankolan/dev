@@ -15,7 +15,7 @@ SamplingThread::SamplingThread( QObject *parent ):
     serialPort = new QSerialPort( this );
     serialPort->setPortName(serialPortName);
 
-    serialPort->setBaudRate(QSerialPort::Baud19200);
+    serialPort->setBaudRate(QSerialPort::Baud115200);
     serialPort->setDataBits(QSerialPort::Data8);
     serialPort->setFlowControl(QSerialPort::NoFlowControl);
     serialPort->setParity(QSerialPort::NoParity);
