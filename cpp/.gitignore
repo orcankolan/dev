@@ -1,4 +1,5 @@
 /datavisualization
 /qt3d
 /bnd-build*
+/refreshtest-build*
 /serialport
