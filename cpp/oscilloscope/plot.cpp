@@ -23,7 +23,7 @@ public:
         // backing store of QWidget is good enough.
 
         setPaintAttribute( QwtPlotCanvas::BackingStore, false );
-        setBorderRadius( 5 );
+        setBorderRadius( 10 );
 
         if ( QwtPainter::isX11GraphicsSystem() )
         {
@@ -60,8 +60,8 @@ private:
 #if QT_VERSION >= 0x040400
         QLinearGradient gradient;
         gradient.setCoordinateMode( QGradient::StretchToDeviceMode );
-        gradient.setColorAt( 0.0, QColor( 0, 0, 25 ) );
-        gradient.setColorAt( 1.0, QColor( 20, 0, 80 ) );
+        gradient.setColorAt( 0.0, QColor( 0, 49, 110 ) );
+        gradient.setColorAt( 1.0, QColor( 0, 87, 174 ) );
 
         pal.setBrush( QPalette::Window, QBrush( gradient ) );
 #else
@@ -70,6 +70,7 @@ private:
 
         // QPalette::WindowText is used for the curve color
         pal.setColor( QPalette::WindowText, Qt::green );
+
         setPalette( pal );
     }
 };
@@ -77,7 +78,7 @@ private:
 Plot::Plot( QWidget *parent ):
     QwtPlot( parent ),
     d_paintedPoints( 0 ),
-    d_interval( 0.1, 50.1 ),
+    d_interval( 0.0, 10.0 ),
     d_timerId( -1 )
 {
     d_directPainter = new QwtPlotDirectPainter();
@@ -87,9 +88,9 @@ Plot::Plot( QWidget *parent ):
 
     plotLayout()->setAlignCanvasToScales( true );
 
-    setAxisTitle( QwtPlot::xBottom, "Zaman [s]" );
+    setAxisTitle( QwtPlot::xBottom, "Time [s]" );
     setAxisScale( QwtPlot::xBottom, d_interval.minValue(), d_interval.maxValue() );
-    setAxisScale( QwtPlot::yLeft, 0.0, 3000.0 );
+    setAxisScale( QwtPlot::yLeft, -200.0, 200.0 );
 
     QwtPlotGrid *grid = new QwtPlotGrid();
     grid->setPen( Qt::gray, 0.0, Qt::DotLine );
@@ -107,11 +108,12 @@ Plot::Plot( QWidget *parent ):
 
     d_curve = new QwtPlotCurve();
     d_curve->setStyle( QwtPlotCurve::Lines );
-    d_curve->setPen( canvas()->palette().color( QPalette::WindowText ), 2.0 );
+    d_curve->setPen( canvas()->palette().color( QPalette::WindowText ), 4.0 );
     d_curve->setRenderHint( QwtPlotItem::RenderAntialiased, true );
     d_curve->setPaintAttribute( QwtPlotCurve::ClipPolygons, false );
     d_curve->setData( new CurveData() );
     d_curve->attach( this );
+//    d_curve->pen.setWidth(2);
 }
 
 Plot::~Plot()
@@ -208,7 +210,7 @@ void Plot::incrementInterval()
     }
     setAxisScaleDiv( QwtPlot::xBottom, scaleDiv );
 
-    d_origin->setValue( d_interval.minValue() + d_interval.width() / 1.0, 0.0 );
+    d_origin->setValue( d_interval.minValue() + d_interval.width() / 2.0, 0.0 );
 
     d_paintedPoints = 0;
     replot();
@@ -218,7 +220,6 @@ void Plot::timerEvent( QTimerEvent *event )
 {
     if ( event->timerId() == d_timerId )
     {
-        replot(); //added after the original file
         updateCurve();
 
         const double elapsed = d_clock.elapsed() / 1000.0;

@@ -31,7 +31,7 @@ MainWindow::MainWindow( QWidget *parent ):
     d_intervalWheel = new WheelBox( "Zaman Aralığı [s]", 1.0, 100.0, 1.0, this );
     d_intervalWheel->setValue( intervalLength );
 
-    d_timerWheel = new WheelBox( "Örnek Aralığı [ms]", 10.0, 20.0, 0.1, this );
+    d_timerWheel = new WheelBox( "Örnek Aralığı [ms]", 10.0, 2000.0, 0.1, this );
     d_timerWheel->setValue( 10.0 );
 
     QVBoxLayout* vLayout1 = new QVBoxLayout();
@@ -72,6 +72,7 @@ void MainWindow::updateReader(double value)
 {
     qDebug() << value ;
     d_fieldRead->setValue(value);
+//    d_plot->replot();
 }
 
 //double MainWindow::frequency() const

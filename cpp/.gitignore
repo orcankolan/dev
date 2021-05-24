@@ -2,4 +2,5 @@
 /qt3d
 /bnd-build*
 /refreshtest-build*
+/build*
 /serialport

@@ -15,7 +15,7 @@ SamplingThread::SamplingThread( QObject *parent ):
     serialPort = new QSerialPort( this );
     serialPort->setPortName(serialPortName);
 
-    serialPort->setBaudRate(QSerialPort::Baud115200);
+    serialPort->setBaudRate(QSerialPort::Baud19200);
     serialPort->setDataBits(QSerialPort::Data8);
     serialPort->setFlowControl(QSerialPort::NoFlowControl);
     serialPort->setParity(QSerialPort::NoParity);
@@ -74,7 +74,7 @@ void SamplingThread::sample ( double elapsed )
     }
 }
 
-double SamplingThread::value( double ) const
+double SamplingThread::value( double timeStamp) const
 {
 //    const double period = 1.0 / d_frequency;
 //    const double x = ::fmod( timeStamp, period );
