@@ -10,11 +10,12 @@
 #include <QDebug>
 
 MainWindow::MainWindow( QWidget *parent ):
-    QWidget( parent )
+    QWidget( parent ),
+    smplThread(this)
 {
     const double intervalLength = 50.0; // seconds
 
-    smplThread = new SamplingThread( this );
+//    SamplingThread smplThread(this);
 
     d_plot = new Plot( this );
     d_plot->setIntervalLength( intervalLength );

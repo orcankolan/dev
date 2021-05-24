@@ -10,31 +10,31 @@ int main( int argc, char **argv )
     MainWindow window;
     window.resize( 860, 490 );
 
-    window.smplThread->setFrequency( 1.0 );
-    window.smplThread->setAmplitude( window.amplitude() );
-    window.smplThread->setInterval( window.signalInterval() );
+    window.smplThread.setFrequency( 1.0 );
+    window.smplThread.setAmplitude( window.amplitude() );
+    window.smplThread.setInterval( window.signalInterval() );
 
     window.connect( &window, SIGNAL( frequencyChanged( double ) ),
-        window.smplThread, SLOT( setFrequency( double ) ) );
+        &window.smplThread, SLOT( setFrequency( double ) ) );
 
     window.connect( &window, SIGNAL( amplitudeChanged( double ) ),
-        window.smplThread, SLOT( setAmplitude( double ) ) );
+        &window.smplThread, SLOT( setAmplitude( double ) ) );
 
     window.connect( &window, SIGNAL( signalIntervalChanged( double ) ),
-        window.smplThread, SLOT( setInterval( double ) ) );
+        &window.smplThread, SLOT( setInterval( double ) ) );
 
-    window.connect( window.smplThread, SIGNAL( valueChanged( double ) ),
+    window.connect( &window.smplThread, SIGNAL( valueChanged( double ) ),
         &window, SLOT( updateReader( double ) ) );
 
     window.show();
-    window.smplThread->start();
+    window.smplThread.start();
     window.start();
 
     bool ok = app.exec();
 
-    window.smplThread->stop();
+    window.smplThread.stop();
 
-    window.smplThread->wait( 1000 );
+    window.smplThread.wait( 1000 );
 
     return ok;
 }

@@ -13,8 +13,8 @@ class MainWindow : public QWidget
 
 public:
     MainWindow( QWidget * = NULL );
+    SamplingThread smplThread;
     Readbox *d_fieldRead;
-    SamplingThread *smplThread;
 
     void start();
 
