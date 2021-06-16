@@ -77,7 +77,7 @@ private:
 Plot::Plot( QWidget *parent ):
     QwtPlot( parent ),
     d_paintedPoints( 0 ),
-    d_interval( 0.1, 50.1 ),
+    d_interval( 0.0, 50.0 ),
     d_timerId( -1 )
 {
     d_directPainter = new QwtPlotDirectPainter();
@@ -181,6 +181,7 @@ void Plot::updateCurve()
         d_paintedPoints = numPoints;
     }
 
+    replot(); //added after the original file to get line width correctly
     curveData->values().unlock();
 }
 
@@ -218,7 +219,7 @@ void Plot::timerEvent( QTimerEvent *event )
 {
     if ( event->timerId() == d_timerId )
     {
-        replot(); //added after the original file
+//        replot();
         updateCurve();
 
         const double elapsed = d_clock.elapsed() / 1000.0;
